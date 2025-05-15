@@ -25,7 +25,13 @@ const Row = styled.div`
   gap: 16px;
 `;
 
-export default function Home() {
+export default function Home({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle: string;
+}) {
   return (
     <>
       <Head>
@@ -35,8 +41,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <Title>Material design </Title>
-        <Subtitle>With Next.js and Styled Components</Subtitle>
+        <Title>{title}</Title>
+        <Subtitle>{subtitle}</Subtitle>
         <Row>
           <TextField id="outlined-basic" label="Outlined" variant="outlined" />
           <TextField
@@ -114,3 +120,12 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      title: "Material Design",
+      subtitle: "With Next.js and Styled Components",
+    },
+  };
+};
